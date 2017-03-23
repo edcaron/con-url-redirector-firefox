@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Say goodbye to firewall rules",
-  "description": "This extension links you to an proxy that unlock your current url",
+  "name": "CON URL Redirector",
+  "description": "This extension helps you redirecting url's to a curl web based proxy that can unlock your current page if its blocked by a firewall or other kinds of blocking.",
   "version": "1.0",
   "browser_action": {
     "default_icon": "icon128.png"
