@@ -8,6 +8,7 @@ browser.browserAction.onClicked.addListener(function (tab) {
       link: '',
     }, function(items) {
 
+      //verify if the proxy link is set
       if(items.link != ""){
         //create a new url
         var myNewUrl = items.link + tabUrl;
@@ -15,7 +16,11 @@ browser.browserAction.onClicked.addListener(function (tab) {
         //Update the current url to the proxyed url
         browser.tabs.update(tab.id, {url: myNewUrl});
       }else{
-          alert("You have to set the proxy server first. Go to the preferences page and fill the form")
+        //if not set, take the user to the error page
+        browser.tabs.create({
+          url : "errorPage.html",
+          active : true
+        });
       }
 
     });
@@ -25,15 +30,26 @@ browser.browserAction.onClicked.addListener(function (tab) {
 openWithProxy = function(word){
   var query = word.linkUrl;
   //get the proxy link stored
+
   browser.storage.local.get({
     link: '',
   }, function(items) {
 
-  //create a new url
-  var myNewUrl = items.link + query;
+    //verify if the proxy link is set
+    if(items.link != ""){
+      //create a new url
+      var myNewUrl = items.link + query;
 
-  //create a new tab with the proxyed url
-  browser.tabs.create({url: myNewUrl});
+      //create a new tab with the proxyed url
+      browser.tabs.create({url: myNewUrl});
+    }else{
+      //if not set, take the user to the error page
+      browser.tabs.create({
+        url : "errorPage.html",
+        active : true
+      });
+    }
+
   });
 
 };
