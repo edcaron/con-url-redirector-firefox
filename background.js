@@ -8,11 +8,16 @@ browser.browserAction.onClicked.addListener(function (tab) {
       link: '',
     }, function(items) {
 
-    //create a new url
-    var myNewUrl = items.link + tabUrl;
+      if(items.link != ""){
+        //create a new url
+        var myNewUrl = items.link + tabUrl;
 
-    //Update the current url to the proxyed url
-    browser.tabs.update(tab.id, {url: myNewUrl});
+        //Update the current url to the proxyed url
+        browser.tabs.update(tab.id, {url: myNewUrl});
+      }else{
+          alert("You have to set the proxy server first. Go to the preferences page and fill the form")
+      }
+
     });
 
 });
